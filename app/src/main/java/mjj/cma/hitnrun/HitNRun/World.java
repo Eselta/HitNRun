@@ -1,5 +1,7 @@
 package mjj.cma.hitnrun.HitNRun;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ public class World
     public static final float MAX_X = 479;
     public static final float MIN_Y = 0;
     public static final float MAX_Y = 319;
+    public static final int   point = 0;
 
     GameEngine game;
     Sound wallHit;
@@ -19,11 +22,16 @@ public class World
     List<Monster> monsterList = new ArrayList<>();
     ScrollingBackground scrollingBG = new ScrollingBackground();
     float gameSpeed = 100;
+    Typeface font;
+
+    int points = 0;
+    int lives = 3;
 
     public World(GameEngine game)
     {
         this.game = game;
         this.wallHit = game.loadSound("explosion.ogg");
+        this.font = game.loadFont("aller.ttf");
     }
 
     public void update(float deltaTime)
@@ -102,7 +110,6 @@ public class World
             }
         }
         // Ending monters create and remove
-
     }
     // update() end
 
@@ -118,10 +125,9 @@ public class World
             {
                 if(monster.isGood)
                 {
+                    points += 10;
                     monsterList.remove(i);
                 }
-                else
-                    Log.d("collideCarMonster", "MONSTER WAS GOOD **********************");
             }
         }
     }

@@ -15,9 +15,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/assets/xyellowmonster.png" afterPath="$PROJECT_DIR$/app/src/main/assets/xyellowmonster.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/HitNRun/Monster.java" afterPath="$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/HitNRun/Monster.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/HitNRun/World.java" afterPath="$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/HitNRun/World.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/HitNRun/WorldRenderer.java" afterPath="$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/HitNRun/WorldRenderer.java" />
     </list>
@@ -50,8 +48,8 @@
       <file leaf-file-name="World.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/HitNRun/World.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.56719816">
-              <caret line="120" column="42" selection-start-line="120" selection-start-column="42" selection-end-line="120" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.546697">
+              <caret line="127" column="30" selection-start-line="127" selection-start-column="30" selection-end-line="127" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -63,7 +61,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/HitNRun/WorldRenderer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="80" selection-start-line="38" selection-start-column="80" selection-end-line="38" selection-end-column="80" />
+              <caret line="34" column="70" selection-start-line="34" selection-start-column="70" selection-end-line="34" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1729,8 +1727,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/GameEngine/Screen.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/GameEngine/State.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/GameEngine/TouchEvent.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/HitNRun/WorldRenderer.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/HitNRun/Monster.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/HitNRun/WorldRenderer.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/HitNRun/World.java" />
       </list>
     </option>
@@ -2497,7 +2495,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/HitNRun/WorldRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="80" selection-start-line="38" selection-start-column="80" selection-end-line="38" selection-end-column="80" />
+          <caret line="34" column="70" selection-start-line="34" selection-start-column="70" selection-end-line="34" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -2506,8 +2504,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/mjj/cma/hitnrun/HitNRun/World.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56719816">
-          <caret line="120" column="42" selection-start-line="120" selection-start-column="42" selection-end-line="120" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.546697">
+          <caret line="127" column="30" selection-start-line="127" selection-start-column="30" selection-end-line="127" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
