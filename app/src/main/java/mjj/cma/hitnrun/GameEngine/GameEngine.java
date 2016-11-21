@@ -30,9 +30,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by Eselta on 05-09-2016.
- */
 public abstract class GameEngine extends Activity implements Runnable, View.OnKeyListener, SensorEventListener
 {
 

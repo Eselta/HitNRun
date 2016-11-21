@@ -2,9 +2,6 @@ package mjj.cma.hitnrun.HitNRun;
 
 import mjj.cma.hitnrun.GameEngine.*;
 
-/**
- * Created by Eselta on 24-10-2016.
- */
 public class CarScroller extends GameEngine
 {
     @Override

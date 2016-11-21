@@ -1,12 +1,11 @@
 package mjj.cma.hitnrun.HitNRun;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import mjj.cma.hitnrun.GameEngine.*;
 
-/**
- * Created by Eselta on 31-10-2016.
- */
 public class World
 {
     public static final float MIN_X = 0;
@@ -35,24 +34,11 @@ public class World
             scrollingBG.scrollX = 0;
         }
 
-        if(!game.isTouchDown(0))
-        {
-            float[] accel = game.getAccelerometer();
-            car.y = car.y + (accel[0] * 20 * deltaTime);
-            game.clearAccelerometer();
-        }
-
-        synchronized (car)
+        synchronized (this)
         {
             if (game.isTouchDown(0))
             {
-
-                List<TouchEvent> touchList = game.getTouchEvents();
-                int touchListSize = touchList.size();
-                if (touchListSize > 0)
-                {
-                    car.y = game.getTouchY(touchListSize - 1) - (car.HEIGHT / 2);
-                }
+                car.y = game.getTouchY(0) - car.HEIGHT / 2;
             }
         }
 

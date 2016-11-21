@@ -2,9 +2,6 @@ package mjj.cma.hitnrun.HitNRun;
 
 import mjj.cma.hitnrun.GameEngine.*;
 
-/**
- * Created by Eselta on 31-10-2016.
- */
 public class GameScreen extends Screen
 {
 

@@ -1,8 +1,5 @@
 package mjj.cma.hitnrun.HitNRun;
 
-/**
- * Created by Eselta on 31-10-2016.
- */
 public class Car
 {
     public static final float WIDTH = 64;

@@ -3,9 +3,6 @@ package mjj.cma.hitnrun.HitNRun;
 import android.graphics.Bitmap;
 import mjj.cma.hitnrun.GameEngine.*;
 
-/**
- * Created by Eselta on 24-10-2016.
- */
 public class MainMenuScreen extends Screen
 {
 
