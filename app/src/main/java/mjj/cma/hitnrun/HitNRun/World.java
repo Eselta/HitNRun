@@ -24,7 +24,7 @@ public class World
     public World(GameEngine game)
     {
         this.game = game;
-        this.wallHit = game.loadSound("bounce.wav");
+        this.wallHit = game.loadSound("explosion.ogg");
     }
 
     public void update(float deltaTime)
