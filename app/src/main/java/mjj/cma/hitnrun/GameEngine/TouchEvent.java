@@ -1,8 +1,5 @@
 package mjj.cma.hitnrun.GameEngine;
 
-/**
- * Created by Eselta on 19-09-2016.
- */
 public class TouchEvent
 {
     public enum TouchEventType

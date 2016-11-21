@@ -6,9 +6,6 @@ import android.util.Log;
 
 import java.io.IOException;
 
-/**
- * Created by Eselta on 03-10-2016.
- */
 public class Music implements MediaPlayer.OnCompletionListener
 {
     private MediaPlayer mediaPlayer; //For reading music files and streaming to the speakers

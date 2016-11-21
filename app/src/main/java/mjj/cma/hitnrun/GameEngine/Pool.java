@@ -3,9 +3,6 @@ package mjj.cma.hitnrun.GameEngine;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Eselta on 19-09-2016.
- */
 public abstract class Pool<T>
 {
     private List<T> items = new ArrayList<>();

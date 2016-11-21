@@ -1,18 +1,20 @@
 package mjj.cma.hitnrun.HitNRun;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import mjj.cma.hitnrun.GameEngine.*;
 
-/**
- * Created by Eselta on 31-10-2016.
- */
 public class World
 {
     public static final float MIN_X = 0;
     public static final float MAX_X = 479;
     public static final float MIN_Y = 0;
     public static final float MAX_Y = 319;
+    public static final int   point = 0;
 
     GameEngine game;
     Sound wallHit;
@@ -20,42 +22,51 @@ public class World
     List<Monster> monsterList = new ArrayList<>();
     ScrollingBackground scrollingBG = new ScrollingBackground();
     float gameSpeed = 100;
+    Typeface font;
+
+    int points = 0;
+    int lives = 3;
 
     public World(GameEngine game)
     {
         this.game = game;
         this.wallHit = game.loadSound("explosion.ogg");
+        this.font = game.loadFont("aller.ttf");
     }
 
     public void update(float deltaTime)
     {
+        /*
+            Background moving
+         */
         scrollingBG.scrollX = scrollingBG.scrollX + (gameSpeed * deltaTime);
         if(scrollingBG.scrollX > (scrollingBG.WIDTH - 480))
         {
             scrollingBG.scrollX = 0;
         }
+        // End
 
-        if(!game.isTouchDown(0))
-        {
-            float[] accel = game.getAccelerometer();
-            car.y = car.y + (accel[0] * 20 * deltaTime);
-            game.clearAccelerometer();
-        }
 
-        synchronized (car)
+        /*
+            Car moving when touch
+         */
+        synchronized (this)
         {
             if (game.isTouchDown(0))
             {
-
-                List<TouchEvent> touchList = game.getTouchEvents();
-                int touchListSize = touchList.size();
-                if (touchListSize > 0)
-                {
-                    car.y = game.getTouchY(touchListSize - 1) - (car.HEIGHT / 2);
-                }
+                car.y = game.getTouchY(0) - car.HEIGHT / 2;
             }
         }
 
+        /*
+            Checking if monster has been hit
+         */
+        collideCarMonster();
+
+
+        /*
+            Checking for wall hit
+         */
         if (car.y < MIN_Y + 20)
         {
             car.y = MIN_Y + 20;
@@ -67,15 +78,27 @@ public class World
             car.y = MAX_Y - car.HEIGHT - 20;
             wallHit.play(1);
         }
+        //Ending wall check
 
+
+        /*
+            Generate monsters
+         */
         int random = (int)(1000 * Math.random());
         if(random > 980)
         {
             Monster monster = new Monster();
             monster.y = 30 + (int) (250 * Math.random());
+
+            if(Math.random() < 0.5)
+                monster.isGood = false;
+
             monsterList.add(monster);
         }
 
+        /*
+            Monster movement and removal when out of screen
+         */
         Monster monster;
         for(int i = 0; i < monsterList.size(); i++)
         {
@@ -86,6 +109,40 @@ public class World
                 monsterList.remove(i);
             }
         }
+        // Ending monters create and remove
+    }
+    // update() end
 
+
+
+    private void collideCarMonster()
+    {
+        Monster monster;
+        for (int i = 0; i < monsterList.size(); i++)
+        {
+            monster = monsterList.get( i );
+            if( collideRecs( car.x, car.y, Car.WIDTH, Car.HEIGHT, monster.x, monster.y, Monster.WIDTH, Monster.HEIGHT ) )
+            {
+                if(monster.isGood)
+                {
+                    points += 10;
+                    monsterList.remove(i);
+                }
+            }
+        }
+    }
+
+    private boolean collideRecs( float x1, float y1, float width1, float height1,
+                                 float x2, float y2, float width2, float height2 )
+    {
+        if( x1 < (x2 + width2) &&       // left edge of Obj1 is to the left of the right edge Obj2
+                (x1 + width1) > x2 &&   // right edge of the Obj1 is to the right of edge Obj2
+                (y1 + height1) > y2 &&  // bottom edge Obj1 is below top edge Obj2
+                y1 < (y2 + height2)     // top edge Obj1 is above edge Obj2
+                )
+        {
+            return true;
+        }
+        return false;
     }
 }
