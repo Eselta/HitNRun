@@ -10,6 +10,7 @@ public class WorldRenderer
     Bitmap backgroundImage;
     Bitmap carImage;
     Bitmap monsterImage;
+    Bitmap monsterImageEvil;
 
     int backgroundWidth = 0;
     int backgroundHeight = 0;
@@ -21,6 +22,7 @@ public class WorldRenderer
         this.backgroundImage = game.loadBitmap("xcarbackground.png");
         this.carImage = game.loadBitmap("xbluecar2.png");
         this.monsterImage = game.loadBitmap("xyellowmonster.png");
+        this.monsterImageEvil = game.loadBitmap("xyellowmonsterEvil.png");
         this.backgroundWidth = backgroundImage.getWidth();
         this.backgroundHeight = backgroundImage.getHeight();
     }
@@ -31,7 +33,10 @@ public class WorldRenderer
         game.drawBitmap(carImage, (int)world.car.x, (int)world.car.y);
         for (Monster monster : world.monsterList)
         {
-            game.drawBitmap(monsterImage, (int)monster.x, (int)monster.y);
+            if(monster.isGood == true)
+                game.drawBitmap(monsterImage, (int)monster.x, (int)monster.y);
+            else
+                game.drawBitmap(monsterImageEvil, (int)monster.x, (int)monster.y);
         }
     }
 }
