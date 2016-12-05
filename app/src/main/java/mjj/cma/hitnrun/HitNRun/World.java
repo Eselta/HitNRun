@@ -10,11 +10,20 @@ import mjj.cma.hitnrun.GameEngine.*;
 
 public class World
 {
+    private enum State
+    {
+        Running,
+        Paused,
+    }
+
     public static final float MIN_X = 0;
     public static final float MAX_X = 479;
     public static final float MIN_Y = 0;
     public static final float MAX_Y = 319;
     public static final int   point = 0;
+    public State state = State.Running;
+
+
 
     GameEngine game;
     Sound wallHit;
@@ -37,80 +46,91 @@ public class World
 
     public void update(float deltaTime)
     {
+        if (state == State.Paused)
+        {
+            if (game.isTouchDown(1))
+            {
+                state = State.Running;
+            }
+        }
+
+        if (state == State.Running)
+        {
         /*
             Background moving
          */
-        scrollingBG.scrollX = scrollingBG.scrollX + (gameSpeed * deltaTime);
-        if(scrollingBG.scrollX > (scrollingBG.WIDTH - 480))
-        {
-            scrollingBG.scrollX = 0;
-        }
-        // End
+            scrollingBG.scrollX = scrollingBG.scrollX + (gameSpeed * deltaTime);
+            if (scrollingBG.scrollX > (scrollingBG.WIDTH - 480))
+            {
+                scrollingBG.scrollX = 0;
+            }
+            // End
 
 
         /*
             Car moving when touch
          */
-        synchronized (this)
-        {
-            if (game.isTouchDown(0))
+            synchronized (this)
             {
-                car.y = game.getTouchY(0) - car.HEIGHT / 2;
+                if (game.isTouchDown(0))
+                {
+                    car.y = game.getTouchY(0) - car.HEIGHT / 2;
+                }
             }
-        }
 
         /*
             Checking if monster has been hit
          */
-        collideCarMonster();
+            collideCarMonster();
 
 
         /*
             Checking for wall hit
          */
-        if (car.y < MIN_Y + 20)
-        {
-            car.y = MIN_Y + 20;
-            wallHit.play(1);
-        }
+            if (car.y < MIN_Y + 20)
+            {
+                car.y = MIN_Y + 20;
+                wallHit.play(1);
+            }
 
-        if(car.y + car.HEIGHT > MAX_Y - 20)
-        {
-            car.y = MAX_Y - car.HEIGHT - 20;
-            wallHit.play(1);
-        }
-        //Ending wall check
+            if (car.y + car.HEIGHT > MAX_Y - 20)
+            {
+                car.y = MAX_Y - car.HEIGHT - 20;
+                wallHit.play(1);
+            }
+            //Ending wall check
 
 
         /*
             Generate monsters
          */
-        int random = (int)(1000 * Math.random());
-        if(random > monsterGenerateSpeed)
-        {
-            Monster monster = new Monster();
-            monster.y = 30 + (int) (250 * Math.random());
+            int random = (int) (1000 * Math.random());
+            if (random > monsterGenerateSpeed)
+            {
+                Monster monster = new Monster();
+                monster.y = 30 + (int) (250 * Math.random());
 
-            if(Math.random() < 0.5)
-                monster.isGood = false;
+                if (Math.random() < 0.5)
+                    monster.isGood = false;
 
-            monsterList.add(monster);
-        }
+                monsterList.add(monster);
+            }
 
         /*
             Monster movement and removal when out of screen
          */
-        Monster monster;
-        for(int i = 0; i < monsterList.size(); i++)
-        {
-            monster = monsterList.get(i);
-            monster.x = monster.x - (gameSpeed * deltaTime);
-            if(monster.x < -32)
+            Monster monster;
+            for (int i = 0; i < monsterList.size(); i++)
             {
-                monsterList.remove(i);
+                monster = monsterList.get(i);
+                monster.x = monster.x - (gameSpeed * deltaTime);
+                if (monster.x < -32)
+                {
+                    monsterList.remove(i);
+                }
             }
+            // Ending monsters create and remove
         }
-        // Ending monsters create and remove
     }
     // update() end
 
@@ -148,6 +168,7 @@ public class World
                         return;
                     }
 
+                    state = State.Paused;
                 }
             }
         }
