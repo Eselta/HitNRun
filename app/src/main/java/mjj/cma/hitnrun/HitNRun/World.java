@@ -63,6 +63,11 @@ public class World
          */
         collideCarMonster();
 
+        if(points > 0 && points%3 == 0)
+        {
+            gameSpeed += 2;
+        }
+
 
         /*
             Checking for wall hit
@@ -109,7 +114,7 @@ public class World
                 monsterList.remove(i);
             }
         }
-        // Ending monters create and remove
+        // Ending monsters create and remove
     }
     // update() end
 
@@ -127,6 +132,13 @@ public class World
                 {
                     points += 10;
                     monsterList.remove(i);
+                }
+
+                else
+                {
+                    scrollingBG.scrollX = 0;
+                    lives--;
+
                 }
             }
         }
