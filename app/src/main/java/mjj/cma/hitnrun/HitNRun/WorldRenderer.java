@@ -34,6 +34,7 @@ public class WorldRenderer
         game.drawBitmap(backgroundImage, 0, 0, (int)world.scrollingBG.scrollX, 0, 480, 320);
         game.drawBitmap(carImage, (int)world.car.x, (int)world.car.y);
         game.drawText(world.font, "Points: " + Integer.toString( world.points ), 10, 310, Color.WHITE, 16 );
+        game.drawText(world.font, "Lives: " + Integer.toString(world.lives), 410, 310, Color.WHITE, 16);
 
 
         for (Monster monster : world.monsterList)

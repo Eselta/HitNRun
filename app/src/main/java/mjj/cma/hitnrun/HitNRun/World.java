@@ -26,6 +26,7 @@ public class World
 
     int points = 0;
     int lives = 3;
+    int monsterGenerateSpeed = 980;
 
     public World(GameEngine game)
     {
@@ -63,11 +64,6 @@ public class World
          */
         collideCarMonster();
 
-        if(points > 0 && points%3 == 0)
-        {
-            gameSpeed += 2;
-        }
-
 
         /*
             Checking for wall hit
@@ -90,7 +86,7 @@ public class World
             Generate monsters
          */
         int random = (int)(1000 * Math.random());
-        if(random > 980)
+        if(random > monsterGenerateSpeed)
         {
             Monster monster = new Monster();
             monster.y = 30 + (int) (250 * Math.random());
@@ -132,12 +128,25 @@ public class World
                 {
                     points += 10;
                     monsterList.remove(i);
-                }
 
+                    if(points > 0 && points%3 == 0)
+                    {
+                        gameSpeed += 30;
+                        monsterGenerateSpeed -= 4;
+                    }
+
+                }
                 else
                 {
-                    scrollingBG.scrollX = 0;
                     lives--;
+                    monsterList.remove(i);
+                    //scrollingBG.scrollX = 0;
+
+                    if(lives == 0)
+                    {
+                        game.setScreen( new MainMenuScreen( game ) );
+                        return;
+                    }
 
                 }
             }
