@@ -48,7 +48,7 @@ public class World
     {
         if (state == State.Paused)
         {
-            if (game.isTouchDown(1))
+            if (game.isTouchDown(0) && game.getTouchX(0) < 240)
             {
                 state = State.Running;
             }
@@ -169,6 +169,7 @@ public class World
                     }
 
                     state = State.Paused;
+
                 }
             }
         }
