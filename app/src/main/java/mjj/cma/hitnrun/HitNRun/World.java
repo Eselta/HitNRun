@@ -62,11 +62,11 @@ public class World
             {
                 scrollingBG.scrollX = 0;
             }
-            // End
+            // End background scroll
 
 
         /*
-            Car moving when touch
+            Car movement related to touching the screen
          */
             synchronized (this)
             {
@@ -77,7 +77,7 @@ public class World
             }
 
         /*
-            Various car checks
+           Generation and behaviour of monsters, and Car collision checks
          */
             collideCarMonster();
             collideCarWall();
@@ -85,9 +85,6 @@ public class World
             generateMonsters();
             moveMonsters(deltaTime);
 
-        /*
-            Monster movement and removal when out of screen
-         */
         }
     }
     // update() end

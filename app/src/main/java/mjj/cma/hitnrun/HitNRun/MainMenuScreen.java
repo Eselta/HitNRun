@@ -10,10 +10,12 @@ public class MainMenuScreen extends Screen
     Bitmap startGame;
     Bitmap backGround;
     float startTime         =       System.nanoTime();
+                                    //Float notation ".0f"
     float passedTime          =       0.0f;
 
     public MainMenuScreen(GameEngine game)
     {
+        //Caspers underlige OCD-måde at noterer på, fordi "det ser pænere ud"
         super(game);
         backGround          =       game.loadBitmap("xcarbackground.png");
         car                 =       game.loadBitmap("xbluecar2.png");

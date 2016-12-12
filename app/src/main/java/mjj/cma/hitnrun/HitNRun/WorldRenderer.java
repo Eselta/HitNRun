@@ -7,6 +7,8 @@ import mjj.cma.hitnrun.GameEngine.*;
 
 public class WorldRenderer
 {
+
+    //Variable creation
     GameEngine game;
     World world;
     Bitmap backgroundImage;
@@ -19,6 +21,8 @@ public class WorldRenderer
 
     public WorldRenderer(GameEngine game, World world)
     {
+
+        //assigning attributes to variables
         this.game = game;
         this.world = world;
         this.backgroundImage = game.loadBitmap("xcarbackground.png");
@@ -37,6 +41,7 @@ public class WorldRenderer
         game.drawText(world.font, "Lives: " + Integer.toString(world.lives), 410, 310, Color.WHITE, 16);
 
 
+        //Drawing a monster FOR EACH monster in the monsterslist
         for (Monster monster : world.monsterList)
         {
             if(monster.isGood == true)

@@ -6,5 +6,7 @@ public class Monster
     public static final float HEIGHT = 25;
     public float x = 480 - (WIDTH / 2);
     public float y = 160 - (HEIGHT / 2);
+
+    //Will this monster add points or not, when hit?
     public boolean isGood = true;
 }
