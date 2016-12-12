@@ -1,8 +1,6 @@
 package mjj.cma.hitnrun.HitNRun;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,63 +77,41 @@ public class World
             }
 
         /*
-            Checking if monster has been hit
+            Various car checks
          */
             collideCarMonster();
+            collideCarWall();
 
-
-        /*
-            Checking for wall hit
-         */
-            if (car.y < MIN_Y + 20)
-            {
-                car.y = MIN_Y + 20;
-                wallHit.play(1);
-            }
-
-            if (car.y + car.HEIGHT > MAX_Y - 20)
-            {
-                car.y = MAX_Y - car.HEIGHT - 20;
-                wallHit.play(1);
-            }
-            //Ending wall check
-
-
-        /*
-            Generate monsters
-         */
-            int random = (int) (1000 * Math.random());
-            if (random > monsterGenerateSpeed)
-            {
-                Monster monster = new Monster();
-                monster.y = 30 + (int) (250 * Math.random());
-
-                if (Math.random() < 0.5)
-                    monster.isGood = false;
-
-                monsterList.add(monster);
-            }
+            generateMonsters();
+            moveMonsters(deltaTime);
 
         /*
             Monster movement and removal when out of screen
          */
-            Monster monster;
-            for (int i = 0; i < monsterList.size(); i++)
-            {
-                monster = monsterList.get(i);
-                monster.x = monster.x - (gameSpeed * deltaTime);
-                if (monster.x < -32)
-                {
-                    monsterList.remove(i);
-                }
-            }
-            // Ending monsters create and remove
         }
     }
     // update() end
 
 
+    //Checking for wall hit
+    private void collideCarWall()
+    {
 
+        if (car.y < MIN_Y + 20)
+        {
+            car.y = MIN_Y + 20;
+            wallHit.play(1);
+        }
+
+        if (car.y + car.HEIGHT > MAX_Y - 20)
+        {
+            car.y = MAX_Y - car.HEIGHT - 20;
+            wallHit.play(1);
+        }
+    }//Ending wall check
+
+
+    //Checking if mosnters are hit
     private void collideCarMonster()
     {
         Monster monster;
@@ -144,6 +120,8 @@ public class World
             monster = monsterList.get( i );
             if( collideRecs( car.x, car.y, Car.WIDTH, Car.HEIGHT, monster.x, monster.y, Monster.WIDTH, Monster.HEIGHT ) )
             {
+
+                //Awards points for every good monster hit
                 if(monster.isGood)
                 {
                     points += 10;
@@ -156,12 +134,12 @@ public class World
                     }
 
                 }
+
+                //Crashes card if bad monster is hit
                 else
                 {
                     lives--;
                     monsterList.remove(i);
-                    //scrollingBG.scrollX = 0;
-
                     if(lives == 0)
                     {
                         game.setScreen( new MainMenuScreen( game ) );
@@ -173,7 +151,7 @@ public class World
                 }
             }
         }
-    }
+    }//Ending monster hit check
 
     private boolean collideRecs( float x1, float y1, float width1, float height1,
                                  float x2, float y2, float width2, float height2 )
@@ -188,4 +166,38 @@ public class World
         }
         return false;
     }
+
+
+    // Generate monsters
+    public void generateMonsters()
+    {
+        int random = (int) (1000 * Math.random());
+        if (random > monsterGenerateSpeed)
+        {
+            Monster monster = new Monster();
+            monster.y = 30 + (int) (250 * Math.random());
+
+            if (Math.random() < 0.5)
+                monster.isGood = false;
+
+            monsterList.add(monster);
+        }
+    }//End generate monsters
+
+
+
+    //Move and remove monsters
+    public void moveMonsters(float deltaTime)
+    {
+        Monster monster;
+        for (int i = 0; i < monsterList.size(); i++)
+        {
+            monster = monsterList.get(i);
+            monster.x = monster.x - (gameSpeed * deltaTime);
+            if (monster.x < -32)
+            {
+                monsterList.remove(i);
+            }
+        }
+    }// ending move and remove monsters
 }
