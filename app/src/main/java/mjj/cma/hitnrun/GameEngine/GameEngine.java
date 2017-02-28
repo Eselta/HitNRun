@@ -2,6 +2,7 @@ package mjj.cma.hitnrun.GameEngine;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -526,4 +527,20 @@ public abstract class GameEngine extends Activity implements Runnable, View.OnKe
         }
     }
 
+    public void setHighScore(int score)
+    {
+        //setting preferences
+        SharedPreferences prefs = this.getSharedPreferences("HitNRun_highscore", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("HitNRun_highscore", score);
+        editor.commit();
+    }
+
+    public int getHighScore()
+    {
+        SharedPreferences prefs = this.getSharedPreferences("HitNRun_highscore", Context.MODE_PRIVATE);
+        int score = prefs.getInt("HitNRun_highscore", 0);
+
+        return score;
+    }
 }

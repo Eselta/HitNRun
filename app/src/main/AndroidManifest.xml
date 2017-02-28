@@ -9,6 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".HitNRun.CarScroller"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
                   android:screenOrientation="landscape"
                   android:configChanges="keyboard|keyboardHidden|orientation">
             <intent-filter>

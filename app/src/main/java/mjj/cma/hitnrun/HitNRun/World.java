@@ -1,10 +1,12 @@
 package mjj.cma.hitnrun.HitNRun;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
-
 import java.util.ArrayList;
 import java.util.List;
-import mjj.cma.hitnrun.GameEngine.*;
+
+import mjj.cma.hitnrun.GameEngine.GameEngine;
+import mjj.cma.hitnrun.GameEngine.Sound;
 
 public class World
 {
@@ -24,7 +26,7 @@ public class World
 
 
     GameEngine game;
-    Sound wallHit;
+    Sound smash;
     Car car = new Car();
     List<Monster> monsterList = new ArrayList<>();
     ScrollingBackground scrollingBG = new ScrollingBackground();
@@ -38,12 +40,21 @@ public class World
     public World(GameEngine game)
     {
         this.game = game;
-        this.wallHit = game.loadSound("explosion.ogg");
         this.font = game.loadFont("aller.ttf");
+        this.smash = game.loadSound("smashing.mp3");
     }
 
     public void update(float deltaTime)
     {
+
+        //If hitting pause button in top left corner
+        if (game.getTouchX(0) > 0 && game.getTouchX(0) < 30 && game.getTouchY(0) > 0 && game.getTouchY(0) < 30)
+        {
+            state = State.Paused;
+        }
+
+
+
         if (state == State.Paused)
         {
             if (game.isTouchDown(0) && game.getTouchX(0) < 240)
@@ -70,7 +81,7 @@ public class World
          */
             synchronized (this)
             {
-                if (game.isTouchDown(0))
+                if (game.isTouchDown(0) && game.getTouchY(0) > 50 && game.getTouchY(0) < 270)
                 {
                     car.y = game.getTouchY(0) - car.HEIGHT / 2;
                 }
@@ -80,32 +91,12 @@ public class World
            Generation and behaviour of monsters, and Car collision checks
          */
             collideCarMonster();
-            collideCarWall();
-
             generateMonsters();
             moveMonsters(deltaTime);
 
         }
     }
     // update() end
-
-
-    //Checking for wall hit
-    private void collideCarWall()
-    {
-
-        if (car.y < MIN_Y + 20)
-        {
-            car.y = MIN_Y + 20;
-            wallHit.play(1);
-        }
-
-        if (car.y + car.HEIGHT > MAX_Y - 20)
-        {
-            car.y = MAX_Y - car.HEIGHT - 20;
-            wallHit.play(1);
-        }
-    }//Ending wall check
 
 
     //Checking if mosnters are hit
@@ -118,9 +109,18 @@ public class World
             if( collideRecs( car.x, car.y, Car.WIDTH, Car.HEIGHT, monster.x, monster.y, Monster.WIDTH, Monster.HEIGHT ) )
             {
 
+
+                if(monster.isMagic)
+                {
+                    smash.play(1);
+                    gameSpeed -= 30;
+                    monsterList.remove(i);
+                    continue;
+                }
                 //Awards points for every good monster hit
                 if(monster.isGood)
                 {
+                    smash.play(1);
                     points += 10;
                     monsterList.remove(i);
 
@@ -131,20 +131,17 @@ public class World
                     }
 
                 }
-
-                //Crashes card if bad monster is hit
+                //Crashes car if bad monster is hit
                 else
                 {
                     lives--;
                     monsterList.remove(i);
                     if(lives == 0)
                     {
-                        game.setScreen( new MainMenuScreen( game ) );
+                        game.setScreen( new GameOverScreen( game, points ) );
                         return;
                     }
-
                     state = State.Paused;
-
                 }
             }
         }
@@ -174,9 +171,14 @@ public class World
             Monster monster = new Monster();
             monster.y = 30 + (int) (250 * Math.random());
 
-            if (Math.random() < 0.5)
+            double isGoodRand = Math.random();
+            if (isGoodRand < 0.5)
                 monster.isGood = false;
-
+            if(isGoodRand < 0.051)
+            {
+                monster.isMagic = true;
+                monster.isGood = true;
+            }
             monsterList.add(monster);
         }
     }//End generate monsters

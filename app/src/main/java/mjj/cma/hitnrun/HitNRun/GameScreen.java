@@ -4,12 +4,10 @@ import mjj.cma.hitnrun.GameEngine.*;
 
 public class GameScreen extends Screen
 {
-
     enum State
     {
         Running,
         Paused,
-        GameOver
     }
 
     State state = State.Running;

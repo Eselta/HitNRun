@@ -9,4 +9,5 @@ public class Monster
 
     //Will this monster add points or not, when hit?
     public boolean isGood = true;
+    public boolean isMagic = false;
 }
